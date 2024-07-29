@@ -6,7 +6,7 @@
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:13:05 by ylai              #+#    #+#             */
-/*   Updated: 2024/07/30 00:00:13 by ylai             ###   ########.fr       */
+/*   Updated: 2024/07/30 00:31:11 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,15 @@ int	main(void)
 	void	*window;
 
 	mlx = mlx_init();
-	if (!mlx) {
+	if (!mlx)
+	{
 			fprintf(stderr, "Failed to initialize MiniLibX\n");
 			return 1;
 	}
 
 	window = mlx_new_window(mlx, 800, 600, "My MiniLibX Window");
-	if (!window) {
+	if (!window)
+	{
 			fprintf(stderr, "Failed to create window\n");
 			return 1;
 	}
