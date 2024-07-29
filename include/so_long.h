@@ -6,13 +6,13 @@
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:53:16 by ylai              #+#    #+#             */
-/*   Updated: 2024/07/27 16:55:12 by ylai             ###   ########.fr       */
+/*   Updated: 2024/07/29 21:10:11 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG
 # define SO_LONG
 
-# include <mlx.h>
+# include "../minilibx-linux/mlx.h"
 
 #endif

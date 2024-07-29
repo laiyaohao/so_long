@@ -6,9 +6,31 @@
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:13:05 by ylai              #+#    #+#             */
-/*   Updated: 2024/07/27 16:55:47 by ylai             ###   ########.fr       */
+/*   Updated: 2024/07/30 00:00:13 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/so_long.h"
+#include "minilibx-linux/mlx.h"
+#include <stdio.h>
 
+int	main(void)
+{
+	void	*mlx;
+	void	*window;
+
+	mlx = mlx_init();
+	if (!mlx) {
+			fprintf(stderr, "Failed to initialize MiniLibX\n");
+			return 1;
+	}
+
+	window = mlx_new_window(mlx, 800, 600, "My MiniLibX Window");
+	if (!window) {
+			fprintf(stderr, "Failed to create window\n");
+			return 1;
+	}
+
+	// Enter the MiniLibX loop
+	mlx_loop(mlx);
+	return 0;
+}
