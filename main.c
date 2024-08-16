@@ -12,13 +12,35 @@
 
 #include "minilibx-linux/mlx.h"
 #include <stdio.h>
+#include "so_long.h"
+// #include <stdlib.h>
 
-int	main(void)
+// int  close_window_esc(int keycode, void *param)
+// {
+//   (void) param;
+//   if (keycode == 65307)
+//     exit(0);
+// 	return 0;
+// }
+
+int	main(int argc, char **argv)
 {
 	void	*mlx;
 	void	*window;
 	// void	*image;
 
+	if (argc != 2 || argc != 1)
+	{
+		fprintf(stderr, "Usage: %s <map>\n", argv[0]);
+		return 1;
+	}
+
+	// check if the map is valid
+	if (!check_map(argv[1]))
+	{
+		fprintf(stderr, "Invalid map\n");
+		return 1;
+	}
 	mlx = mlx_init();
 	if (!mlx)
 	{
@@ -26,7 +48,7 @@ int	main(void)
 			return 1;
 	}
 
-	window = mlx_new_window(mlx, 800, 600, "My MiniLibX Window");
+	window = mlx_new_window(mlx, 800, 600, "so_long");
 	if (!window)
 	{
 			fprintf(stderr, "Failed to create window\n");
@@ -34,6 +56,7 @@ int	main(void)
 	}	
 	// image = mlx_new_image(mlx, 50, 50);
 	mlx_string_put(mlx, window, 300,300, 0x00FF0000,"habfsanf");
+	printf("color value: %d\n", mlx_get_color_value(mlx, 0x00FF0000));
 	// 0x00 is just the filler
 	// then, RRGGBB is the color
 	// in above example, FF is for red, 00 is for green, and 00 is for blue
@@ -49,6 +72,16 @@ int	main(void)
 	}
 
 	*/
+	// below are hooks that help to close the windows
+	// when escape key is pressed
+	mlx_key_hook(window, close_window_esc, NULL);
+	// when the 'x' button is clicked
+	mlx_hook(window, 17, 0, close_window_click, NULL);
+
+	// minimize the window
+	mlx_do_sync(mlx);
+
+
 	// Enter the MiniLibX loop
 	// mlx_loop waits for events like mouse clicks, key presses
 	// so after this function, i cannot draw on the window anymore

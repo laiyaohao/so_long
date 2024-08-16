@@ -13,6 +13,11 @@
 #ifndef SO_LONG
 # define SO_LONG
 
-# include "../minilibx-linux/mlx.h"
+# include "minilibx-linux/mlx.h"
+# include <stdio.h>
+# include <stdlib.h>
+
+int  close_window_esc(int keycode, void *param);
+int  close_window_click(void *param);
 
 #endif

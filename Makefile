@@ -11,23 +11,22 @@
 # **************************************************************************** #
 
 NAME := so_long
-CC := gcc
-MINILIBX_DIR := minilibx-linux/
-CFLAGS := -Wall -Werror -Wextra -I${MINILIBX_DIR} -L${MINILIBX_DIR}
+CC := cc
+MINILIBX_DIR := minilibx-linux
+CFLAGS := -Wall -Werror -Wextra
+MINILIBX_FLAGS := -I${MINILIBX_DIR} -L${MINILIBX_DIR}
 LDFLAGS = -lmlx -lXext -lX11
-INCLUDE_DIR := include/
-SRC_DIR := src/
 MAP_DIR := maps/
 TEXTURES_DIR := textures/
-SRC_FILES := main
-SRCS := $(addprefix $(SRC_DIR)/, $(addsuffix .c, $(SRC_FILES)))
-OBJS := ${SRCS:.c=.o}
+SRC_FILE_NAMES := main close_window_esc close_window_click
+SRCS := $(addsuffix .c, $(SRC_FILE_NAMES))
+OBJS := ${SRCS:.c=.o}	
+
+%.o: %.c
+	${CC} ${CFLAGS} -c $< -o $@
 
 ${NAME}: ${OBJS}
-	ar rcs $@ $^
-
-${OBJS}: ${SRCS}
-	${CC} ${CFLAGS} $< -o $@
+	${CC} ${CFLAGS} ${MINILIBX_FLAGS} ${OBJS} ${LDFLAGS} -o $@
 
 all: ${NAME}
 
