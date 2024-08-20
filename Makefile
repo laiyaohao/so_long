@@ -18,8 +18,11 @@ MINILIBX_FLAGS := -I${MINILIBX_DIR} -L${MINILIBX_DIR}
 LDFLAGS = -lmlx -lXext -lX11
 MAP_DIR := maps/
 TEXTURES_DIR := textures/
-SRC_FILE_NAMES := main close_window_esc close_window_click
-SRCS := $(addsuffix .c, $(SRC_FILE_NAMES))
+GNL_DIR := get_next_line/
+GNL_FILE_NAMES := get_next_line_bonus get_next_line_utils_bonus
+SRC_FILE_NAMES := main close_window_esc close_window_click check_map
+SRCS := $(addsuffix .c, $(SRC_FILE_NAMES)) \
+				$(addsuffix .c, $(addprefix ${GNL_DIR}, ${GNL_FILE_NAMES}))
 OBJS := ${SRCS:.c=.o}	
 
 %.o: %.c

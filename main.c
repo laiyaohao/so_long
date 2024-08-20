@@ -29,7 +29,7 @@ int	main(int argc, char **argv)
 	void	*window;
 	// void	*image;
 
-	if (argc != 2 || argc != 1)
+	if (argc != 2)
 	{
 		fprintf(stderr, "Usage: %s <map>\n", argv[0]);
 		return 1;

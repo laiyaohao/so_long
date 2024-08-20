@@ -16,8 +16,14 @@
 # include "minilibx-linux/mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
+# include <fcntl.h>
+# include <unistd.h>
 
-int  close_window_esc(int keycode, void *param);
-int  close_window_click(void *param);
+int close_window_esc(int keycode, void *param);
+int close_window_click(void *param);
+int	check_map(char *map);
+char	*get_next_line(int fd);
+
+
 
 #endif
