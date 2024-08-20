@@ -8,7 +8,7 @@ void  check_walls(char pixel, int line_num, int num_of_lines, int *error)
     *error = 1;
 }
 
-void check_error(char pixel, int *map_exit, int *map_start, int *error, int *collect)
+void check_error(char pixel, int *map_exit, int *map_start, int *error)
 {
   if (pixel == 'E')
   {
@@ -24,34 +24,36 @@ void check_error(char pixel, int *map_exit, int *map_start, int *error, int *col
     else
       *map_start = 1;
   }
-  if (pixel == 'C')
-    *collect++;
 }
 
-int check_line(char *line, int line_num, int num_of_lines)
+int check_line(char *line, int line_num, int num_of_lines, int *fd)
 {
   int i;
   int map_exit;
   int map_start;
   int error;
-  int collect;
 
   error = 0;
   if (line[0] != '1')
     return (1);
   i = 1;
-  collect = 0;
   map_exit = 0;
   map_start = 0;
-  while (line[i] != '\n')
+  while (line != '\0')
   {
-    check_walls(line[i], line_num, num_of_lines, &error);
-    if (line[i] == 'C' || line[i] == 'E' || line[i] == 'P'
-      || line[i] == '1' || line[i] == '0')
+    while (line[i] != '\n')
     {
-      check_error(line[i], &map_exit, &map_start, &error, &collect);
-      i++;
-    } 
+      check_walls(line[i], line_num, num_of_lines, &error);
+      if (line[i] == 'C' || line[i] == 'E' || line[i] == 'P'
+        || line[i] == '1' || line[i] == '0')
+      {
+        check_error(line[i], &map_exit, &map_start, &error);
+        i++;
+      } 
+    }
+    line = get_next_line(*fd);
+    line_num++;
   }
+  
   return (0);
 }
