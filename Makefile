@@ -6,7 +6,7 @@
 #    By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/27 15:38:16 by ylai              #+#    #+#              #
-#    Updated: 2024/08/10 16:10:23 by ylai             ###   ########.fr        #
+#    Updated: 2024/08/20 18:36:23 by ylai             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ MAP_DIR := maps/
 TEXTURES_DIR := textures/
 GNL_DIR := get_next_line/
 GNL_FILE_NAMES := get_next_line_bonus get_next_line_utils_bonus
-SRC_FILE_NAMES := main close_window_esc close_window_click check_map
+SRC_FILE_NAMES := main close_window_esc close_window_click check_map \
+									check_line
 SRCS := $(addsuffix .c, $(SRC_FILE_NAMES)) \
 				$(addsuffix .c, $(addprefix ${GNL_DIR}, ${GNL_FILE_NAMES}))
 OBJS := ${SRCS:.c=.o}	
