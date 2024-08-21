@@ -6,7 +6,7 @@
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:13:05 by ylai              #+#    #+#             */
-/*   Updated: 2024/08/13 19:49:01 by ylai             ###   ########.fr       */
+/*   Updated: 2024/08/21 21:12:05 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int argc, char **argv)
 {
 	void	*mlx;
 	void	*window;
+	int	fd;
 	// void	*image;
 
 	if (argc != 2)
@@ -34,9 +35,9 @@ int	main(int argc, char **argv)
 		fprintf(stderr, "Usage: %s <map>\n", argv[0]);
 		return 1;
 	}
-
+	fd = open_map(argv[1]);
 	// check if the map is valid
-	if (!check_map(argv[1]))
+	if (!check_map(&fd))
 	{
 		fprintf(stderr, "Invalid map\n");
 		return 1;
