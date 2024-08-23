@@ -21,11 +21,14 @@
 
 int close_window_esc(int keycode, void *param);
 int close_window_click(void *param);
-int	check_map(int *fd);
+int	check_shape_wall(char **map);
 char	*get_next_line(int fd);
 int	check_line(char *line, int line_num, int num_of_lines, int *fd);
 int	open_file(char *map);
 int sl_strlen(char *str);
+int count_lines(char *map_file_name);
+int	open_map(char *map);
+char	**copy_map(char *map_file_name);
 
 
 #endif

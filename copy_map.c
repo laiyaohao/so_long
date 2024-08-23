@@ -12,24 +12,44 @@
 
 #include "so_long.h"
 
-char	**copy_map(int *fd)
+char	**place_char(char **map, int num_of_lines, char *line, int fd)
+{
+	int i;
+
+	while (line != NULL)
+	{
+		i = 0;
+		while (line[i] != '\n' && line[i] != '\0')
+		{
+			map[num_of_lines][i] = line[i];
+			i++;
+		}
+		map[num_of_lines][i] = '\0';
+		num_of_lines++;
+		line = get_next_line(fd);
+		printf("num_of_lines: %d\n", num_of_lines);
+	}
+	return (map);
+}
+
+char	**copy_map(char *map_file_name)
 {
 	int	num_of_lines;
 	char  *line;
-	int	cols;
+	int	fd;
 	char	**map;
-	int	i;
 
-	line = get_next_line(*fd);
-	cols = sl_strlen(line);
-	num_of_lines = count_lines(line, &fd);
-	map = (char **)malloc(num_of_lines * sizeof(char *));
-	i = 0;
-	while (i < num_of_lines)
+	fd = open_map(map_file_name);
+	line = get_next_line(fd);
+	num_of_lines = count_lines(map_file_name);
+	map = (char **)malloc((num_of_lines + 1) * sizeof(char *));
+	map[num_of_lines] = NULL;
+	while (num_of_lines != 0)
 	{
-		map[i] = (char *)malloc(cols * sizeof(char));
-		i++;
+		map[num_of_lines - 1] = (char *)malloc((sl_strlen(line) + 1) * sizeof(char));
+		num_of_lines--;
 	}
-	
+	place_char(map, num_of_lines, line, fd);
+	close(fd);
 	return (map);
 }

@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-int	open_file(char *map)
+int	open_map(char *map)
 {
 	int	fd;
 

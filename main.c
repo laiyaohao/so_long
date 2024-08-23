@@ -27,21 +27,34 @@ int	main(int argc, char **argv)
 {
 	void	*mlx;
 	void	*window;
-	int	fd;
-	// void	*image;
+	// int	fd;
+	char	**map;
 
 	if (argc != 2)
 	{
 		fprintf(stderr, "Usage: %s <map>\n", argv[0]);
 		return 1;
 	}
-	fd = open_map(argv[1]);
+	// fd = open_map(argv[1]);
+	
+	map = copy_map(argv[1]);
 	// check if the map is valid
-	if (!check_map(&fd))
+	if (!check_shape_wall(map))
 	{
 		fprintf(stderr, "Invalid map\n");
 		return 1;
 	}
+	printf("%s\n", map[0]);
+	printf("%s\n", map[1]);
+	printf("%s\n", map[2]);
+	printf("%s\n", map[3]);
+	printf("%s\n", map[4]);
+	free(map[0]);
+	free(map[1]);
+	free(map[2]);
+	free(map[3]);
+	free(map[4]);
+	free(map);
 	mlx = mlx_init();
 	if (!mlx)
 	{
