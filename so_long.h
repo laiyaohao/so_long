@@ -24,11 +24,14 @@ int close_window_click(void *param);
 int	check_shape_wall(char **map);
 char	*get_next_line(int fd);
 int	check_line(char *line, int line_num, int num_of_lines, int *fd);
-int	open_file(char *map);
 int sl_strlen(char *str);
 int count_lines(char *map_file_name);
 int	open_map(char *map);
 char	**copy_map(char *map_file_name);
-
+int check_map_conditions(char **map);
+int find_item(char **map, char item, char axis);
+int count_items(char **map, char item);
+int	check_path(char *map_file_name);
+void  free_map(char **map);
 
 #endif

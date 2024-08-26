@@ -1,24 +1,25 @@
 #include "so_long.h"
 
-int count_collectables(char **map)
+int count_items(char **map, char item)
 {
   int i;
   int j;
-  int collectables;
+  int count;
 
   i = 0;
+  count = 0;
   while (map[i] != NULL)
   {
     j = 0;
     while (map[i][j] != '\0')
     {
-      if (map[i][j] == 'C')
+      if (map[i][j] == item)
       {
-        collectables++;
+        count++;
       }
       j++;
     }
     i++;
   }
-  return (collectables);
+  return (count);
 }

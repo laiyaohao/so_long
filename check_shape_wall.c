@@ -12,24 +12,6 @@
 
 #include "so_long.h"
 
-// int count_collectables(char *str)
-// {
-//   int i;
-//   int coll;
-
-//   i = 0;
-//   coll = 0;
-//   while (str[i] != '\n' && str[i] != '\0')
-//   {
-//     if (str[i] == 'C')
-//     {
-//       coll++;
-//     }
-//     i++;
-//   }
-//   return (coll);
-// }
-
 // int count_lines(char *line, int *fd)
 // {
 //   int num;

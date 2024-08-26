@@ -39,16 +39,17 @@ int	main(int argc, char **argv)
 	
 	map = copy_map(argv[1]);
 	// check if the map is valid
-	if (!check_shape_wall(map))
+	if (!check_shape_wall(map) || !check_map_conditions(map) || !check_path(argv[1]))
 	{
-		fprintf(stderr, "Invalid map\n");
-		return 1;
-	}
-	printf("%s\n", map[0]);
+		printf("%s\n", map[0]);
 	printf("%s\n", map[1]);
 	printf("%s\n", map[2]);
 	printf("%s\n", map[3]);
 	printf("%s\n", map[4]);
+		fprintf(stderr, "Invalid map\n");
+		return 1;
+	}
+	
 	free(map[0]);
 	free(map[1]);
 	free(map[2]);

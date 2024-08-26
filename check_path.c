@@ -12,19 +12,57 @@
 
 #include "so_long.h"
 
-int	check_path(char *map)
+int flood_fill(int x, int y, char **map)
 {
-	/**
-	 * flood fill algorithm
-	 */
-	int		fd;
-	int		num_of_lines;
-	char  *line;
+	printf("x: %d\n", x);
+	printf("y: %d\n", y);
+	// return (1);
+	// if (map[y][x] == '1' || map[y][x] == 'C' || map[y][x] == 'E')
+	// 	return (0);
+	// map[y][x] = '1';
+	// if (flood_fill(x - 1, y, map) == 1)
+	// 	return (1);
+	// if (flood_fill(x + 1, y, map) == 1)
+	// 	return (1);
+	// if (flood_fill(x, y - 1, map) == 1)
+	// 	return (1);
+	// if (flood_fill(x, y + 1, map) == 1)
+	// 	return (1);
+	// return (0);
+	if (map[y][x] == '1' || map[y][x] == 'V')
+	{
+		printf("map[y][x] == '1' || map[y][x] == 'V'\n");
+		return (0);
+	}
+	map[y][x] = 'V';
+	if (flood_fill(x - 1, y, map) == 1)
+		return (1);
+	if (flood_fill(x + 1, y, map) == 1)
+		return (1);
+	if (flood_fill(x, y - 1, map) == 1)
+		return (1);
+	if (flood_fill(x, y + 1, map) == 1)
+		return (1);
+	return (0);
+}
 
-	fd = open_file(map);
-	line = get_next_line(fd);
-	num_of_lines = count_lines(line, &fd);
+int	check_path(char *map_file_name)
+{
+	char	**map;
+	int	after_flood_fill;
+	int	collectables;
+	int	exits;
+	
+	map = copy_map(map_file_name);
+	after_flood_fill = flood_fill(find_item(map, 'P', 'x'),
+																find_item(map, 'P', 'y'), map);
+	collectables = count_items(map, 'C');
+	exits = count_items(map, 'E');
+	free_map(map);
 
+	if (after_flood_fill == 0 && collectables == 0 && exits == 0)
+		return (1);
+	return (0);
 	// find location of the player first
 	
 }
