@@ -14,6 +14,8 @@ int count_lines(char *map_file_name)
     num++;
     line = get_next_line(fd);
   }
+  free(line);
+  line = NULL;
   close(fd);
   return (num);
 }

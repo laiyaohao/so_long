@@ -8,6 +8,7 @@ void  free_map(char **map)
   while (map[i] != NULL)
   {
     free(map[i]);
+    map[i] = NULL;
     i++;
   }
   free(map);

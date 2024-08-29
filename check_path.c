@@ -14,8 +14,6 @@
 
 int flood_fill(int x, int y, char **map)
 {
-	printf("x: %d\n", x);
-	printf("y: %d\n", y);
 	// return (1);
 	// if (map[y][x] == '1' || map[y][x] == 'C' || map[y][x] == 'E')
 	// 	return (0);
@@ -31,7 +29,6 @@ int flood_fill(int x, int y, char **map)
 	// return (0);
 	if (map[y][x] == '1' || map[y][x] == 'V')
 	{
-		printf("map[y][x] == '1' || map[y][x] == 'V'\n");
 		return (0);
 	}
 	map[y][x] = 'V';
@@ -59,7 +56,7 @@ int	check_path(char *map_file_name)
 	collectables = count_items(map, 'C');
 	exits = count_items(map, 'E');
 	free_map(map);
-
+	map = NULL;
 	if (after_flood_fill == 0 && collectables == 0 && exits == 0)
 		return (1);
 	return (0);

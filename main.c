@@ -10,24 +10,42 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minilibx-linux/mlx.h"
-#include <stdio.h>
 #include "so_long.h"
-// #include <stdlib.h>
 
-// int  close_window_esc(int keycode, void *param)
-// {
-//   (void) param;
-//   if (keycode == 65307)
-//     exit(0);
-// 	return 0;
-// }
+typedef struct s_data {
+	void	*mlx;
+	void	*window;
+	void 	*player;
+	int	play_x;
+	int	play_y;
+} t_data;
+
+void	render_play(void *mlx, void *window, void *play, int play_x, int play_y)
+{
+	printf("render_play\n");
+	mlx_put_image_to_window(mlx, window, play, play_x * TILE_SIZE, play_y * TILE_SIZE);
+}
+
+int handle_keypress(int keycode, t_data *data)
+{
+	printf("keycode: %d\n", keycode);
+	if (keycode == 65361)  // Left arrow
+		data->play_x -= 1;
+	if (keycode == 65363)  // Right arrow
+		data->play_x += 1;
+	if (keycode == 65362)  // Up arrow
+		data->play_y -= 1;
+	if (keycode == 65364)  // Down arrow
+		data->play_y += 1;
+
+  render_play(data->mlx, data->window, data->player, data->play_x, data->play_y);
+
+	return 0;
+}
 
 int	main(int argc, char **argv)
 {
-	void	*mlx;
-	void	*window;
-	// int	fd;
+	t_data	data;
 	char	**map;
 
 	if (argc != 2)
@@ -35,76 +53,65 @@ int	main(int argc, char **argv)
 		fprintf(stderr, "Usage: %s <map>\n", argv[0]);
 		return 1;
 	}
-	// fd = open_map(argv[1]);
 	
 	map = copy_map(argv[1]);
 	// check if the map is valid
-	if (!check_shape_wall(map) || !check_map_conditions(map) || !check_path(argv[1]))
+	if (!check_shape(map) || !check_map_con(map) || !check_path(argv[1]))
 	{
-		printf("%s\n", map[0]);
-	printf("%s\n", map[1]);
-	printf("%s\n", map[2]);
-	printf("%s\n", map[3]);
-	printf("%s\n", map[4]);
 		fprintf(stderr, "Invalid map\n");
 		return 1;
 	}
-	
-	free(map[0]);
-	free(map[1]);
-	free(map[2]);
-	free(map[3]);
-	free(map[4]);
-	free(map);
-	mlx = mlx_init();
-	if (!mlx)
-	{
-			fprintf(stderr, "Failed to initialize MiniLibX\n");
-			return 1;
-	}
+	data.mlx = mlx_init();
 
-	window = mlx_new_window(mlx, 800, 600, "so_long");
-	if (!window)
-	{
-			fprintf(stderr, "Failed to create window\n");
-			return 1;
-	}	
-	// image = mlx_new_image(mlx, 50, 50);
-	mlx_string_put(mlx, window, 300,300, 0x00FF0000,"habfsanf");
-	printf("color value: %d\n", mlx_get_color_value(mlx, 0x00FF0000));
-	// 0x00 is just the filler
-	// then, RRGGBB is the color
-	// in above example, FF is for red, 00 is for green, and 00 is for blue
-	// FF is 255, 00 is 0, and 00 is 0
-	// so above translate to 255, 0, 0 in rgb, which means red.
+	// need to determine window size
+	// by count the number of lines in the map
+	// and multiply it by TILE_SIZE
+	// do this to x axis also
+	// by counting the number of characters in the line
+	// and multiply it by TILE_SIZE
+	// using these values, can put in background image to the window
+	data.window = mlx_new_window(data.mlx, cal_x(map), cal_y(argv[1]), "so_long");
 	
-	/*
-	int i = 1;
-	while (i < 300)
-	{
-		mlx_pixel_put(mlx, window, i, i, 0x00FF0000);
-		i++;
-	}
+	// then we render the map
+	render_map(data.mlx, data.window, map);
+	// int i = 0;
+	// while (i < cal_y(argv[1]))
+	// {
+	// 	int j = 0;
+	// 	while (j < cal_x(map))
+	// 	{
+	// 		mlx_pixel_put(data.mlx, data.window, j, i, 0x0000FFFFFF);
+	// 		j++;
+	// 	}
+		
+	// 	i++;
+	// }
+		
+	data.play_x = find_item(map, 'P', 'x');
+	data.play_y = find_item(map, 'P', 'y');
+	data.player = load_image(data.mlx, "textiles/player.xpm");
+	render_play(data.mlx, data.window, data.player, data.play_x, data.play_y);
+	// printf("after render_play\n");
 
-	*/
-	// below are hooks that help to close the windows
-	// when escape key is pressed
-	mlx_key_hook(window, close_window_esc, NULL);
-	// when the 'x' button is clicked
-	mlx_hook(window, 17, 0, close_window_click, NULL);
+	/**
+	 * for some reason only can have only 1 key hook
+	 */
+	mlx_key_hook(data.window, handle_keypress, &data);
+	// mlx_key_hook(data.window, close_window_esc, NULL);
+	mlx_hook(data.window, 17, 0, close_window_click, NULL);
 
 	// minimize the window
-	mlx_do_sync(mlx);
+	mlx_do_sync(data.mlx);
 
-
+	// mlx_string_put(mlx, window, 300,300, 0x00FF0000,"habfsanf");
 	// Enter the MiniLibX loop
 	// mlx_loop waits for events like mouse clicks, key presses
 	// so after this function, i cannot draw on the window anymore
-	mlx_loop(mlx);
+	mlx_loop(data.mlx);
 
 	
-	
-	
+	free_map(map);
+	map = NULL;
 	
 	return 0;
 }

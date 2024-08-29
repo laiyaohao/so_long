@@ -20,28 +20,32 @@ MAP_DIR := maps/
 TEXTURES_DIR := textures/
 GNL_DIR := get_next_line/
 GNL_FILE_NAMES := get_next_line_bonus get_next_line_utils_bonus
-SRC_FILE_NAMES := main close_window_esc close_window_click check_shape_wall \
+SRC_FILE_NAMES := main close_window_esc close_window_click check_shape \
 									check_line open_map sl_strlen count_lines copy_map \
-									check_map_conditions find_item count_items check_path \
-									free_map
+									check_map_con find_item count_items check_path \
+									free_map render_map render_coll render_wall cal_x cal_y \
+									load_image
 SRCS := $(addsuffix .c, $(SRC_FILE_NAMES)) \
 				$(addsuffix .c, $(addprefix ${GNL_DIR}, ${GNL_FILE_NAMES}))
 OBJS := ${SRCS:.c=.o}	
 
-%.o: %.c
-	${CC} ${CFLAGS} -c $< -o $@
+
+
+all: ${NAME}
 
 ${NAME}: ${OBJS}
 	${CC} ${CFLAGS} ${MINILIBX_FLAGS} ${OBJS} ${LDFLAGS} -o $@
 
-all: ${NAME}
-
 clean:
+	@echo ${OBJS}
 	rm -f ${OBJS}
 
 fclean: clean
 	rm -f ${NAME}
 
 re: fclean all
+
+%.o: %.c
+	${CC} ${CFLAGS} -c $< -o $@
 
 .PHONY: all clean fclean re
