@@ -1,14 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_map.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/30 17:17:31 by ylai              #+#    #+#             */
+/*   Updated: 2024/08/30 17:25:08 by ylai             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-
-void render_map(void *mlx, void *win, char **map)
+void	put_image(t_data *data, void *image, int x, int y)
 {
-	void  *coll_img;
-	void  *wall_img;
-	
-	// (void) map;
-	coll_img = load_image(mlx, "textiles/collectable.xpm");
-	wall_img = load_image(mlx, "textiles/wall.xpm");
-	render_coll(mlx, win, map, coll_img);
-	render_wall(mlx, win, map, wall_img);
+	mlx_put_image_to_window(data->mlx, data->window, image, x
+		* TILE_SIZE, y * TILE_SIZE);
+}
+
+void	render_map(t_data *data, t_images *images)
+{
+	int		x;
+	int		y;
+	void	*img;
+
+	y = 0;
+	while (data->map[y] != NULL)
+	{
+		x = 0;
+		while (data->map[y][x] != '\0')
+		{
+			img = NULL;
+			if (data->map[y][x] == 'C')
+				put_image(data, images->coll_img, x, y);
+			if (data->map[y][x] == '1')
+				put_image(data, images->wall_img, x, y);
+			if (data->map[y][x] == 'P')
+				put_image(data, images->play_img, x, y);
+			if (data->map[y][x] == 'E')
+				put_image(data, images->exit_img, x, y);
+			x++;
+		}
+		y++;
+	}
 }

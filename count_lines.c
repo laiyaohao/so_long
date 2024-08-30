@@ -12,6 +12,8 @@ int count_lines(char *map_file_name)
   while (line != NULL)
   {
     num++;
+		free(line);
+		line = NULL;
     line = get_next_line(fd);
   }
   free(line);

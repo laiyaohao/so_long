@@ -6,19 +6,13 @@
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:13:05 by ylai              #+#    #+#             */
-/*   Updated: 2024/08/21 21:12:05 by ylai             ###   ########.fr       */
+/*   Updated: 2024/08/30 17:32:30 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-typedef struct s_data {
-	void	*mlx;
-	void	*window;
-	void 	*player;
-	int	play_x;
-	int	play_y;
-} t_data;
+
 
 void	render_play(void *mlx, void *window, void *play, int play_x, int play_y)
 {
@@ -28,8 +22,17 @@ void	render_play(void *mlx, void *window, void *play, int play_x, int play_y)
 
 int handle_keypress(int keycode, t_data *data)
 {
+	int	x;
+	int	y;
+
+	x = find_item(data->map, 'P', 'x');
+	y = find_item(data->map, 'P', 'y');
 	printf("keycode: %d\n", keycode);
 	if (keycode == 65361)  // Left arrow
+	{
+		if (data->map[y][x - 1] != '1')
+			
+	}
 		data->play_x -= 1;
 	if (keycode == 65363)  // Right arrow
 		data->play_x += 1;
@@ -46,7 +49,7 @@ int handle_keypress(int keycode, t_data *data)
 int	main(int argc, char **argv)
 {
 	t_data	data;
-	char	**map;
+	t_images	images;
 
 	if (argc != 2)
 	{
@@ -54,9 +57,9 @@ int	main(int argc, char **argv)
 		return 1;
 	}
 	
-	map = copy_map(argv[1]);
+	data.map = copy_map(argv[1]);
 	// check if the map is valid
-	if (!check_shape(map) || !check_map_con(map) || !check_path(argv[1]))
+	if (!check_shape(data.map) || !check_map_con(data.map) || !check_path(argv[1]))
 	{
 		fprintf(stderr, "Invalid map\n");
 		return 1;
@@ -70,10 +73,12 @@ int	main(int argc, char **argv)
 	// by counting the number of characters in the line
 	// and multiply it by TILE_SIZE
 	// using these values, can put in background image to the window
-	data.window = mlx_new_window(data.mlx, cal_x(map), cal_y(argv[1]), "so_long");
-	
+	data.window = mlx_new_window(data.mlx, cal_x(data.map), cal_y(argv[1]), "so_long");
+	images.coll_img = load_image(data.mlx, "textiles/collectable.xpm");
+	images.wall_img = load_image(data.mlx, "textiles/wall.xpm");
+	images.play_img = load_image(data.mlx, "textiles/player.xpm");
 	// then we render the map
-	render_map(data.mlx, data.window, map);
+	render_map(&data, &images);
 	// int i = 0;
 	// while (i < cal_y(argv[1]))
 	// {
@@ -86,7 +91,7 @@ int	main(int argc, char **argv)
 		
 	// 	i++;
 	// }
-		
+	
 	data.play_x = find_item(map, 'P', 'x');
 	data.play_y = find_item(map, 'P', 'y');
 	data.player = load_image(data.mlx, "textiles/player.xpm");

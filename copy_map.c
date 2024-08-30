@@ -6,7 +6,7 @@
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 20:43:59 by ylai              #+#    #+#             */
-/*   Updated: 2024/08/21 21:26:53 by ylai             ###   ########.fr       */
+/*   Updated: 2024/08/30 16:47:14 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ char	**place_char(char **map, int num_of_lines, char *line, int fd)
 		}
 		map[num_of_lines][i] = '\0';
 		num_of_lines++;
+		free(line);
+		line = NULL;
 		line = get_next_line(fd);
 		printf("num_of_lines: %d\n", num_of_lines);
 	}
@@ -50,6 +52,7 @@ char	**copy_map(char *map_file_name)
 		num_of_lines--;
 	}
 	place_char(map, num_of_lines, line, fd);
+	free(line);
 	close(fd);
 	return (map);
 }
