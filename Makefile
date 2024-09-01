@@ -23,7 +23,7 @@ TEXTURES_DIR := textures/
 GNL_DIR := get_next_line/
 GNL_FILE_NAMES := get_next_line_bonus get_next_line_utils_bonus
 SRC_FILE_NAMES := main close_window_click check_shape \
-									open_map sl_strlen count_lines copy_map initialise \
+									sl_strlen count_lines copy_map initialise \
 									check_map_con find_item count_items check_path \
 									free_map render_map cal_x cal_y move_player \
 									load_image

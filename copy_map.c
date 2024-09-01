@@ -40,7 +40,7 @@ char	**copy_map(char *map_file_name)
 	int		fd;
 	char	**map;
 
-	fd = open_map(map_file_name);
+	fd = open(map_file_name, O_RDONLY);
 	line = get_next_line(fd);
 	num_of_lines = count_lines(map_file_name);
 	map = (char **)malloc((num_of_lines + 1) * sizeof(char *));

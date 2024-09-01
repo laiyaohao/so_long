@@ -47,7 +47,6 @@ int				check_shape(char **map);
 char			*get_next_line(int fd);
 int				sl_strlen(char *str);
 int				count_lines(char *map_file_name);
-int				open_map(char *map);
 char			**copy_map(char *map_file_name);
 int				check_map_con(char **map);
 int				find_item(char **map, char item, char axis);

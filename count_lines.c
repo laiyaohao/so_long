@@ -6,7 +6,7 @@ int	count_lines(char *map_file_name)
 	int		fd;
 	int		num;
 
-	fd = open_map(map_file_name);
+	fd = open(map_file_name, O_RDONLY);
 	num = 0;
 	line = get_next_line(fd);
 	while (line != NULL)
