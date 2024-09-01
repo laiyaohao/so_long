@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_window_click.c                               :+:      :+:    :+:   */
+/*   ft_print_char.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/20 18:33:05 by ylai              #+#    #+#             */
-/*   Updated: 2024/08/20 18:33:06 by ylai             ###   ########.fr       */
+/*   Created: 2024/07/21 16:00:05 by ylai              #+#    #+#             */
+/*   Updated: 2024/07/25 19:34:34 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "ft_printf.h"
 
-int	close_window_click(void *param)
+void	ft_print_char(va_list args, int *ans)
 {
-	(void)param;
-	exit(0);
-	return (0);
+	unsigned char	c;
+
+	c = va_arg(args, int);
+	ft_putchar(c, ans);
 }

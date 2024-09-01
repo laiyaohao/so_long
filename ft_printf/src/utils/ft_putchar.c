@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_window_click.c                               :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/20 18:33:05 by ylai              #+#    #+#             */
-/*   Updated: 2024/08/20 18:33:06 by ylai             ###   ########.fr       */
+/*   Created: 2024/07/21 15:46:50 by ylai              #+#    #+#             */
+/*   Updated: 2024/07/24 23:19:00 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../ft_printf.h"
 
-int	close_window_click(void *param)
+void	ft_putchar(char c, int *ans)
 {
-	(void)param;
-	exit(0);
-	return (0);
+	write(1, &c, 1);
+	*ans += 1;
 }

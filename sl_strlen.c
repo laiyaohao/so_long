@@ -12,14 +12,14 @@
 
 #include "so_long.h"
 
-int sl_strlen(char *str)
+int	sl_strlen(char *str)
 {
-  int i;
+	int	i;
 
-  i = 0;
-  while (str && str[i] != '\n' && str[i] != '\0')
+	i = 0;
+	while (str && str[i] != '\n' && str[i] != '\0')
 	{
 		i++;
 	}
-  return (i);
+	return (i);
 }

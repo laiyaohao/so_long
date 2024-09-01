@@ -18,6 +18,6 @@ int	open_map(char *map)
 
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
-    return (0);
+		return (0);
 	return (fd);
 }

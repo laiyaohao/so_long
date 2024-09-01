@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_window_click.c                               :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/20 18:33:05 by ylai              #+#    #+#             */
-/*   Updated: 2024/08/20 18:33:06 by ylai             ###   ########.fr       */
+/*   Created: 2024/07/21 13:38:38 by ylai              #+#    #+#             */
+/*   Updated: 2024/07/24 18:37:43 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../ft_printf.h"
 
-int	close_window_click(void *param)
+long	ft_abs(long i)
 {
-	(void)param;
-	exit(0);
-	return (0);
+	if (i < 0)
+		return (-i);
+	return (i);
 }

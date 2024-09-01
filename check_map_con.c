@@ -1,10 +1,10 @@
 #include "so_long.h"
 
-int check_map_con(char **map)
+int	check_map_con(char **map)
 {
-	int collectables;
-	int start_count;
-	int exit_count;
+	int	collectables;
+	int	start_count;
+	int	exit_count;
 
 	collectables = count_items(map, 'C');
 	start_count = count_items(map, 'P');
