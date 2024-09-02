@@ -6,7 +6,7 @@
 #    By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/27 15:38:16 by ylai              #+#    #+#              #
-#    Updated: 2024/08/21 20:49:21 by ylai             ###   ########.fr        #
+#    Updated: 2024/09/02 14:02:13 by ylai             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC := cc
 MINILIBX_DIR := minilibx-linux
 FT_PRINTF_DIR := ft_printf
 FT_PRINTF := ${FT_PRINTF_DIR}/libftprintf.a
-CFLAGS := -Wall -Werror -Wextra
+CFLAGS := -Wall -Werror -Wextra -g
 MINILIBX_FLAGS := -I${MINILIBX_DIR} -L${MINILIBX_DIR}
 LDFLAGS = -lmlx -lXext -lX11
 MAP_DIR := maps/
@@ -30,9 +30,7 @@ SRC_FILE_NAMES := main close_window_click check_shape \
 SRCS := $(addsuffix .c, $(SRC_FILE_NAMES)) \
 				$(addsuffix .c, $(addprefix ${GNL_DIR}, ${GNL_FILE_NAMES}))
 OBJS := ${SRCS:.c=.o}	
-
-
-
+	
 all: ${FT_PRINTF} ${NAME}
 
 ${NAME}: ${OBJS}

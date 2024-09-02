@@ -6,15 +6,13 @@
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:33:05 by ylai              #+#    #+#             */
-/*   Updated: 2024/08/20 18:33:06 by ylai             ###   ########.fr       */
+/*   Updated: 2024/09/02 13:55:17 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	close_window_click(void *param)
+int	close_window_click(t_data *data)
 {
-	(void)param;
-	exit(0);
-	return (0);
+	return (mlx_loop_end(data->mlx));
 }

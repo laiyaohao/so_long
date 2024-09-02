@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move_player.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/02 13:52:25 by ylai              #+#    #+#             */
+/*   Updated: 2024/09/02 14:12:05 by ylai             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	move_left(t_data *data, int keycode, int x, int y)
@@ -6,7 +18,10 @@ void	move_left(t_data *data, int keycode, int x, int y)
 	{
 		if (x - 1 == data->exit_x && y == data->exit_y
 			&& data->collectables == 0)
-			exit(0);
+		{
+			mlx_loop_end(data->mlx);
+			return ;
+		}
 		if (data->map[y][x - 1] == 'C')
 			data->collectables--;
 		data->map[y][x - 1] = 'P';
@@ -22,7 +37,10 @@ void	move_right(t_data *data, int keycode, int x, int y)
 	{
 		if (x + 1 == data->exit_x && y == data->exit_y
 			&& data->collectables == 0)
-			exit(0);
+		{
+			mlx_loop_end(data->mlx);
+			return ;
+		}
 		if (data->map[y][x + 1] == 'C')
 			data->collectables--;
 		data->map[y][x + 1] = 'P';
@@ -38,7 +56,10 @@ void	move_up(t_data *data, int keycode, int x, int y)
 	{
 		if (x == data->exit_x && y - 1 == data->exit_y
 			&& data->collectables == 0)
-			exit(0);
+		{
+			mlx_loop_end(data->mlx);
+			return ;
+		}
 		if (data->map[y - 1][x] == 'C')
 			data->collectables--;
 		data->map[y - 1][x] = 'P';
@@ -54,7 +75,10 @@ void	move_down(t_data *data, int keycode, int x, int y)
 	{
 		if (x == data->exit_x && y + 1 == data->exit_y
 			&& data->collectables == 0)
-			exit(0);
+		{
+			mlx_loop_end(data->mlx);
+			return ;
+		}
 		if (data->map[y + 1][x] == 'C')
 			data->collectables--;
 		data->map[y + 1][x] = 'P';

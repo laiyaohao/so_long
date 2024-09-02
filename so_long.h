@@ -6,7 +6,7 @@
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:53:16 by ylai              #+#    #+#             */
-/*   Updated: 2024/08/31 16:53:48 by ylai             ###   ########.fr       */
+/*   Updated: 2024/09/02 14:04:50 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # define TILE_SIZE 32
 
-# include "minilibx-linux/mlx.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -42,7 +41,7 @@ typedef struct s_data
 }				t_data;
 
 int				ft_printf(const char *str, ...);
-int				close_window_click(void *param);
+int				close_window_click(t_data *data);
 int				check_shape(char **map);
 char			*get_next_line(int fd);
 int				sl_strlen(char *str);
