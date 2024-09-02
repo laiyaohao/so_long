@@ -6,11 +6,27 @@
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 14:11:31 by ylai              #+#    #+#             */
-/*   Updated: 2024/09/02 14:12:48 by ylai             ###   ########.fr       */
+/*   Updated: 2024/09/02 19:50:37 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	cal_x(char **map)
+{
+	int	i;
+
+	i = sl_strlen(map[0]) * TILE_SIZE;
+	return (i);
+}
+
+int	cal_y(char *map_file_name)
+{
+	int	i;
+
+	i = count_lines(map_file_name);
+	return (i * TILE_SIZE);
+}
 
 int	handle_keypress(int keycode, t_data *data)
 {
@@ -53,7 +69,7 @@ void	initialise(t_data *data, char **argv)
 	data->collectables = count_items(data->map, 'C');
 	render_map(data);
 	mlx_key_hook(data->window, handle_keypress, data);
-	mlx_hook(data->window, 17, 0, close_window_click, data);
+	mlx_hook(data->window, 17, 0, mlx_loop_end, data->mlx);
 	mlx_do_sync(data->mlx);
 	mlx_loop(data->mlx);
 	destroy_map(data);
