@@ -15,7 +15,6 @@
 
 # define TILE_SIZE 32
 
-# include "minilibx-linux/mlx.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -53,10 +52,12 @@ int				count_items(char **map, char item);
 int				check_path(char *map_file_name);
 void			free_map(char **map);
 void			render_map(t_data *data);
-// int				cal_x(char **map);
-// int				cal_y(char *map_file_name);
+void			render_map_bonus(t_data *data);
+void			initialise_bonus(t_data *data, char **argv);
 void			*load_image(void *mlx, char *path);
 void			initialise(t_data *data, char **argv);
 void			move_player(t_data *data, int keycode, int x, int y);
+char			*ft_itoa(int n);
+void			move_player_bonus(t_data *data, int keycode, int x, int y);
 
 #endif
