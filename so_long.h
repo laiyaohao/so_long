@@ -15,6 +15,7 @@
 
 # define TILE_SIZE 32
 
+# include "minilibx-linux/mlx.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>

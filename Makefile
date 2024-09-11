@@ -13,6 +13,7 @@
 NAME := so_long
 CC := cc
 MINILIBX_DIR := minilibx-linux
+MINILIBX := ${MINILIBX_DIR}/libmlx.a
 FT_PRINTF_DIR := ft_printf
 FT_PRINTF := ${FT_PRINTF_DIR}/libftprintf.a
 LIBFT_DIR := libft
@@ -42,14 +43,15 @@ BONUS_SRCS := $(addsuffix .c, $(BONUS_FILE_NAMES)) \
 					$(addsuffix .c, $(addprefix ${GNL_DIR}, ${GNL_FILE_NAMES}))
 BONUS_OBJS := ${BONUS_SRCS:.c=.o}
 	
-all: ${FT_PRINTF} ${NAME}
+all: ${FT_PRINTF} ${MINILIBX} ${NAME}
 
 ${NAME}: ${OBJS}
-	${CC} ${CFLAGS} ${MINILIBX_FLAGS} ${OBJS} ${FT_PRINTF} ${LDFLAGS} -o $@
+	${CC} ${CFLAGS} ${MINILIBX_FLAGS} ${OBJS} ${FT_PRINTF} ${MINILIBX} ${LDFLAGS} -o $@
 
 clean:
 	@make -C ${FT_PRINTF_DIR} clean
 	@make -C ${LIBFT_DIR} clean
+	@make -C ${MINILIBX_DIR} clean
 	rm -f ${OBJS}
 	rm -f ${BONUS_OBJS}
 
@@ -61,10 +63,10 @@ fclean: clean
 
 re: fclean all
 
-bonus: ${FT_PRINTF} ${LIBFT} ${BONUS_NAME}
+bonus: ${FT_PRINTF} ${LIBFT} ${MINILIBX} ${BONUS_NAME}
 
 ${BONUS_NAME}: ${BONUS_OBJS}
-	${CC} ${CFLAGS} ${MINILIBX_FLAGS} ${BONUS_OBJS} ${FT_PRINTF} ${LIBFT} ${LDFLAGS} -o $@
+	${CC} ${CFLAGS} ${MINILIBX_FLAGS} ${BONUS_OBJS} ${FT_PRINTF} ${LIBFT} ${MINILIBX} ${LDFLAGS} -o $@
 
 %.o: %.c
 	${CC} ${CFLAGS} -c $< -o $@
@@ -74,5 +76,8 @@ ${FT_PRINTF}:
 
 ${LIBFT}:
 	@make -C ${LIBFT_DIR}
+
+${MINILIBX}:
+	@make -C ${MINILIBX_DIR}
 
 .PHONY: all clean fclean re
